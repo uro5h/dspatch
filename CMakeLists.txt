@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wnon-virtual-dtor")
+# Set default compile flags for GCC
+if(CMAKE_COMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -pedantic -Wall -Wextra")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 if(UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -pthread")
@@ -18,7 +21,7 @@ file(GLOB hdrs include/*.h)
 file(GLOB in_hdrs include/dspatch/*.h)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 # Build shared (LGPL)
