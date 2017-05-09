@@ -32,11 +32,13 @@ add_library(
     ${in_hdrs}
 )
 
-target_link_libraries(
-    ${PROJECT_NAME}
-    -static-libgcc
-    -static-libstdc++
-)
+if(CMAKE_COMPILER_IS_GNUCXX)
+    target_link_libraries(
+        ${PROJECT_NAME}
+        -static-libgcc
+        -static-libstdc++
+    )
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 # Link pthread and dl on Unix
 if(UNIX)
